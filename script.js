@@ -95,9 +95,11 @@ function updateContent(manual = false) {
     headingElement.classList.remove('fade');
 
     imageGallery.innerHTML = "";
+
     imageSets[currentIndex].forEach((src, i) => {
       const img = document.createElement("img");
       img.src = src;
+      img.style.animationDelay = `${i * 100}ms`; //  Add staggered delay
       imageGallery.appendChild(img);
     });
 
@@ -110,7 +112,6 @@ function updateContent(manual = false) {
   if (!manual) {
     currentIndex = (currentIndex + 1) % imageSets.length;
   } else {
-    // Pause autoplay on manual click
     stopAutoPlay();
     clearTimeout(resumeTimeout);
     resumeTimeout = setTimeout(startAutoPlay, 6000);
@@ -129,3 +130,5 @@ function stopAutoPlay() {
 createDots(imageSets.length);
 updateContent();
 startAutoPlay();
+
+
